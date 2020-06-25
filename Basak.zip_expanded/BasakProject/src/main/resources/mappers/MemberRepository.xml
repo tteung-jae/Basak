@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+
+	<!-- 멤버 조회 -->
+	<select id="memberList" resultType="com.basak.app.model.MemberVO">
+		SELECT 
+			MEMBER_ID AS memberId,
+			MEMBER_PW AS memberPw,
+			MEMBER_NAME AS memberName
+		FROM MEMBER
+		ORDER BY memberName
+	</select>
+	
+	<!-- 회원 가입 -->
+	<insert id="insertMember">
+		INSERT INTO MEMBER
+		VALUES (#{memberId}, #{memberPw}, #{memberName})
+	</insert>
+	
+	<!-- 로그인 -->
+	<select id="login" resultType="com.basak.app.model.MemberVO">
+		SELECT 
+			MEMBER_ID AS memberId, 
+			MEMBER_NAME AS memberName
+		FROM MEMBER
+		WHERE MEMBER_ID = #{memberId} 
+		AND MEMBER_PW = #{memberPw}
+	</select>
+	
+	<!-- View Member -->
+	<select id="viewMember" resultType="com.basak.app.model.MemberVO">
+		SELECT 
+			MEMBER_ID AS memberId,
+			MEMBER_PW AS memberPw,
+			MEMBER_NAME AS memberName
+		FROM MEMBER
+		WHERE MEMBER_ID = #{memberId} AND MEMBER_PW = #{memberPw}
+	</select>
+</mapper>
